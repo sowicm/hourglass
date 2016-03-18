@@ -7,7 +7,7 @@
 QT       += core gui widgets
 QT       += multimedia
 
-TARGET = ZhiZunShaLou
+TARGET = Hourglass
 TEMPLATE = app
 
 
