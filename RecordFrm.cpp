@@ -409,8 +409,12 @@ void RecordFrm::on_runcmdCheck_clicked(bool checked)
 
 void RecordFrm::on_soundButton_clicked()
 {
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0] + "/sounds";
+    QDir dir;
+    if (!dir.exists(path))
+        dir.mkpath(path);
     ui->specSoundRadio->setChecked(true);
-    QString fileName = QFileDialog::getOpenFileName(this);
+    QString fileName = QFileDialog::getOpenFileName(this, QString(), path);
     if (!fileName.isEmpty())
     {
         ui->soundEdit->setText(fileName);

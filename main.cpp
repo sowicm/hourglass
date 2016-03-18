@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     //QTextCodec::codecForName("UTF-8"));
 #endif
 
-    a.setApplicationName("至尊沙漏");
+    a.setApplicationName("Sowicm's Hourglass");
     a.setOrganizationName("sowicm");
     a.setOrganizationDomain("sowicm.com");
 

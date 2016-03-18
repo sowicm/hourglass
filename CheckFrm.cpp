@@ -214,7 +214,7 @@ void CheckFrm::on_lineEdit_textChanged(QString filterPattern)
 
 void CheckFrm::on_pushButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, QString(), qApp->applicationDirPath(), "数据文件(*.dat)");
+    QString fileName = QFileDialog::getOpenFileName(this, QString(), QString(), "数据文件(*.dat)");
     if (!fileName.isEmpty())
     {
         int n = m_pMain->LoadDB(fileName);

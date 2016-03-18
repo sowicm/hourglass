@@ -140,7 +140,7 @@ int cTray::Setup()
     m_pMenu->addAction(m_pacQuit);
 
     m_pIcon = new QSystemTrayIcon(this);
-    m_pIcon->setIcon(QIcon(":/res/BIGICON.ico"));
+    m_pIcon->setIcon(QIcon(":/res/icon.ico"));
     m_pIcon->setToolTip(getToolTip());
     m_pIcon->setContextMenu(m_pMenu);
 
@@ -150,8 +150,11 @@ int cTray::Setup()
     m_pIcon->show();
     ShowMessage(NULL, "至尊沙漏开始运行...", NoIcon);//QSystemTrayIcon::MessageIcon(0)
 
-
-    LoadDB(qApp->applicationDirPath() + "/db.dat");
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0];
+    QDir dir;
+    if (!dir.exists(path))
+        dir.mkpath(path);
+    LoadDB(path + "/db.dat");
 
     int i = m_Records.size() - 1;
     for (; i >= 0; --i)
@@ -214,7 +217,7 @@ void cTray::SetMessage(const QString &title, const QString &msg, TrayMessageIcon
 {
     m_Message.title = title;
     m_Message.msg = msg;
-    m_Message.icon = (QSystemTrayIcon::MessageIcon)icon;
+    m_Message.icon = (QSystemTrayIcon::MessageIcon)NoIcon;
     m_Message.msecs = msecs;
 }
 
@@ -369,13 +372,17 @@ void cTray::UpdateTrayMessage()
 
 void cTray::LoadIni()
 {
-    if (QFileInfo("./config.ini").exists())
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0];
+    QDir dir;
+    if (!dir.exists(path))
+        dir.mkpath(path);
+    if (QFileInfo(path + "/config.ini").exists())
     {
-        m_pCfg = new QSettings("./config.ini", QSettings::IniFormat);
+        m_pCfg = new QSettings(path + "/config.ini", QSettings::IniFormat);
     }
     else
     {
-        m_pCfg = new QSettings("./config.ini", QSettings::IniFormat);
+        m_pCfg = new QSettings(path + "/config.ini", QSettings::IniFormat);
         m_pCfg->setValue("/config/autorun", 1);
         m_pCfg->setValue("/config/style", "Pagefold");
         m_pCfg->setValue("/config/defaultSound", "./sounds/ring.mp3");
@@ -845,7 +852,11 @@ void cTray::createDbFile()
 
 void cTray::updateDbFile()
 {
-    FILE *fp = fopen((qApp->applicationDirPath() + "/db.dat").toLocal8Bit(), "wb");
+    QString path = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0];
+    QDir dir;
+    if (!dir.exists(path))
+        dir.mkpath(path);
+    FILE *fp = fopen((path + "/db.dat").toLocal8Bit(), "wb");
     if (!fp)
         return;
     int n = 'z';
@@ -1006,6 +1017,7 @@ void cTray::mainloop()
 
 void cTray::setAutoRun(bool bAutoRun)
 {
+#ifdef QS_WIN32
     QSettings *reg = new QSettings(
             "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
             , QSettings::NativeFormat);
@@ -1018,4 +1030,5 @@ void cTray::setAutoRun(bool bAutoRun)
     else
         reg->remove("ZhiZunShaLou");
     delete reg;
+#endif
 }
