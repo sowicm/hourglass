@@ -6,8 +6,9 @@
 #include <QSystemTrayIcon>
 #include <QMutex>
 
-#include <phonon/audiooutput.h>
-#include <phonon/MediaObject>
+
+#include <QAudioOutput>
+#include <QMediaPlayer>
 
 class QSettings;
 class QAction;
@@ -184,9 +185,8 @@ public:
     QList<stRecord>                 m_Records;// QList<stRecord*> faster?
     QList<QMessageBox*>             m_MsgBoxes;
 
-    Phonon::MediaObject             m_MediaObject;
-    Phonon::AudioOutput             m_AudioOutput;
-    Phonon::Path                    m_audioOutputPath;
+    QAudioOutput                    m_AudioOutput;
+    QMediaPlayer                    m_MediaPlayer;
 
     int                             m_nCheckInternet;
     bool                            m_bIsOnline;

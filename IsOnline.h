@@ -1,8 +1,10 @@
 
 #include <QtCore>
 
+#ifdef QS_WIN32
 bool wsastartup();
 void wsacleanup();
+#endif
 
 class cIsOnline : public QThread
 {

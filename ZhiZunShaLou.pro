@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-QT       += phonon
+QT       += core gui widgets
+QT       += multimedia
 
 TARGET = ZhiZunShaLou
 TEMPLATE = app
@@ -40,6 +40,8 @@ RESOURCES += \
 RC_FILE += \
     res.rc
 
+win32{
 LIBS += \
     "C:\Program Files\Microsoft SDKs\Windows\v7.0A\Lib\WS2_32.lib" \
     "C:\Program Files\Microsoft SDKs\Windows\v7.0A\Lib\SensAPI.lib"
+}

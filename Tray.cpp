@@ -1,13 +1,11 @@
 ﻿#include "Tray.h"
 
-#include "norwegianwoodstyle.h"
 #include "settingsfrm.h"
 #include "MissingsFrm.h"
 #include "RecordFrm.h"
 #include "CheckFrm.h"
 
 #include <QtGui>
-/*
 #include <QTimer>
 #include <QMessageBox>
 #include <QAction>
@@ -19,7 +17,7 @@
 #include <QSettings>
 #include <QFileInfo>
 //#include <QSound>
-*/
+
 
 #include "IsOnline.h"
 
@@ -40,7 +38,7 @@ bool reccmp(const stRecord &r1, const stRecord &r2)
 cTray::cTray()
     : QWidget(NULL)
     , m_pCfg(NULL)
-    , m_AudioOutput(Phonon::VideoCategory)
+    , m_AudioOutput()
 {
     setWindowIcon(QIcon(":/res/BIGICON.ico"));
     setWindowTitle("至尊沙漏");
@@ -60,7 +58,7 @@ cTray::cTray()
 
     // Sounds
 
-    m_audioOutputPath = Phonon::createPath(&m_MediaObject, &m_AudioOutput);
+    //m_audioOutputPath = Phonon::createPath(&m_MediaObject, &m_AudioOutput);
 }
 
 cTray::~cTray()
@@ -89,8 +87,10 @@ cTray::~cTray()
     if (m_pIsOnline)
         delete m_pIsOnline;
 
+#ifdef QS_WIN32
     if (m_nCheckInternet > 0)
         wsacleanup();
+#endif
 }
 
 int cTray::Setup()
@@ -181,7 +181,9 @@ int cTray::Setup()
 
         if (m_nCheckInternet <= 0)
         {
+#ifdef QS_WIN32
             wsastartup();
+#endif
             m_pIsOnline = new cIsOnline(m_mutexIsOnline, m_bIsOnline);
             m_pIsOnline->start(QThread::IdlePriority);
         }
@@ -231,7 +233,9 @@ void cTray::AddRecord(stRecord &rec, bool modify)
     {
         if (m_nCheckInternet <= 0)
         {
+#ifdef QS_WIN32
             wsastartup();
+#endif
             if (!m_pIsOnline)
                 m_pIsOnline = new cIsOnline(m_mutexIsOnline, m_bIsOnline);
             m_pIsOnline->start(QThread::IdlePriority);
@@ -386,7 +390,7 @@ void cTray::LoadIni()
 
 int cTray::LoadDB(const QString &DBFilePath)
 {
-    FILE *fp = fopen(DBFilePath.toAscii(), "rb");
+    FILE *fp = fopen(DBFilePath.toLocal8Bit(), "rb");
     if (!fp)
         return -1;
     int n;
@@ -657,7 +661,7 @@ void cTray::changeStyle(const QString &style)
     }
     else if (style == "Wood")
     {
-        qApp->setStyle(new NorwegianWoodStyle);
+//        qApp->setStyle(new NorwegianWoodStyle);
         qApp->setStyleSheet("");
     }
     /*
@@ -841,7 +845,7 @@ void cTray::createDbFile()
 
 void cTray::updateDbFile()
 {
-    FILE *fp = fopen((qApp->applicationDirPath() + "/db.dat").toAscii(), "wb");
+    FILE *fp = fopen((qApp->applicationDirPath() + "/db.dat").toLocal8Bit(), "wb");
     if (!fp)
         return;
     int n = 'z';
@@ -876,17 +880,17 @@ void cTray::doRemind(int i)
     {
         if (rec.soundfile[0])
         {
-            m_MediaObject.setCurrentSource(Phonon::MediaSource(rec.soundfile));
+            m_MediaPlayer.setMedia(QUrl::fromLocalFile(rec.soundfile));
             //QSound::play(rec.soundfile);
         }
         else
         {
-            m_MediaObject.setCurrentSource(Phonon::MediaSource(
+            m_MediaPlayer.setMedia(QUrl::fromLocalFile(
                     m_pCfg->value("/config/defaultSound", "./sounds/ring.mp3").toString()
                     ));
             //QSound::play(m_pCfg->value("/config/defaultSound", "./sounds/ring.mp3").toString());
         }
-        m_MediaObject.play();
+        m_MediaPlayer.play();
     }
     if (m_switchTurn && rec.autoTurn)
     {
@@ -933,7 +937,9 @@ void cTray::mainloop()
                             if (m_nCheckInternet <= 0)
                             {
                                 m_pIsOnline->exit();
+#ifdef QS_WIN32
                                 wsacleanup();
+#endif
                             }
                         }
                     }
@@ -958,7 +964,9 @@ void cTray::mainloop()
                         if (m_nCheckInternet <= 0)
                         {
                             m_pIsOnline->exit();
+#ifdef QS_WIN32
                             wsacleanup();
+#endif
                         }
                     }
                 }

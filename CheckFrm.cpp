@@ -4,11 +4,11 @@
 #include "Tray.h"
 
 #include <QtGui>
-/*
 #include <QSortFilterProxyModel>
 #include <QStandardItemModel>
 #include <QMessageBox>
-*/
+#include <QFileDialog>
+
 
 CheckFrm::CheckFrm(cTray *pMain) :
         QWidget(NULL)//, Qt::FramelessWindowHint)

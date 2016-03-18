@@ -1,16 +1,18 @@
-﻿#include <QtGui/QApplication>
+﻿#include <QApplication>
 #include <QtCore/QTextCodec>
 #include <QDir>
 
 #include "Tray.h"
 
+#ifdef QS_WIN32
 #include <windows.h>
+#endif
 
 int main(int argc, char *argv[])
 {
     QDir::setCurrent(qApp->applicationDirPath());
 
-#if 1
+#if defined(QS_WIN32) && 1
     HANDLE hMutex = CreateMutexA(NULL, TRUE, "ZhiZunShaLou");
     if (GetLastError() == ERROR_ALREADY_EXISTS)
     {
@@ -23,12 +25,14 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(resource);
 
     QApplication a(argc, argv);
+#if defined(QS_WIN32)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
     //QTextCodec::codecForName("UTF-8"));
+#endif
 
     a.setApplicationName("至尊沙漏");
-    a.setOrganizationName("至尊明帅");
-    a.setOrganizationDomain("zi-jin.com");
+    a.setOrganizationName("sowicm");
+    a.setOrganizationDomain("sowicm.com");
 
     a.setQuitOnLastWindowClosed(false);
 
@@ -36,7 +40,7 @@ int main(int argc, char *argv[])
     tray.Setup();
 
     int ret = a.exec();
-#if 1
+#if  defined(QS_WIN32) && 1
     CloseHandle(hMutex);
 #endif
 

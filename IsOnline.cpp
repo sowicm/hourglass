@@ -1,17 +1,23 @@
 
 #include "IsOnline.h"
 
-
+#ifdef QS_WIN32
 #include <WinSock2.h>
 #pragma comment(lib, "ws2_32.lib")
 #include <C:\Program Files\Microsoft SDKs\Windows\v7.0A\include\SensAPI.h>
 #pragma comment(lib, "SensAPI.lib")
+#else
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <unistd.h>
+#endif
 
 #if 0
 #include <wininet.h>
 #pragma comment(lib, "Wininet.lib")
 #endif
 
+#ifdef QS_WIN32
 bool wsastartup()
 {
     WSADATA wsaData;
@@ -25,13 +31,16 @@ void wsacleanup()
 {
     WSACleanup();
 }
+#endif
 
 bool IsOnline()
 {
+#ifdef QS_WIN32
     DWORD dwFlags;
     BOOL m_bAlive = IsNetworkAlive(&dwFlags);
     if (!m_bAlive)
         return false;
+#endif
 
     hostent *phe = gethostbyname("www.sina.com");
     return (phe != NULL);
@@ -86,6 +95,10 @@ void cIsOnline::run()
             m_bIsOnline = IsOnline();
             m_mutex.unlock();
         }
+#ifdef QS_WIN32
         Sleep(200);
+#else
+        sleep(200);
+#endif
     }
 }

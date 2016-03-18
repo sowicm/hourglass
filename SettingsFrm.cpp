@@ -4,13 +4,11 @@
 #include "Tray.h"
 
 #include <QtGui>
-/*
 #include <QSettings>
 #include <QFileDialog>
 #include <QCompleter>
 #include <QFileSystemModel>
 #include <QMessageBox>
-*/
 
 
 SettingsFrm::SettingsFrm(cTray *pMain) :
@@ -81,7 +79,7 @@ void SettingsFrm::on_styleCombo_currentIndexChanged(QString str)
 
 void SettingsFrm::on_pushButton_clicked()
 {
-    if (strlen(ui->soundEdit->text().toAscii().data()) > 260)
+    if (strlen(ui->soundEdit->text().toLocal8Bit().data()) > 260)
     {
         QMessageBox::critical(this, "Are you kidding me?", "声音文件有这么长的路径吗？");
         return;

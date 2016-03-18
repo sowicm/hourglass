@@ -4,6 +4,10 @@
 #include "Tray.h"
 
 #include <QtGui>
+#include <QCompleter>
+#include <QFileSystemModel>
+#include <QFileDialog>
+#include <QMessageBox>
 
 RecordFrm::RecordFrm(cTray *pMain) :
     QWidget(NULL)//, Qt::FramelessWindowHint)
@@ -270,7 +274,7 @@ void RecordFrm::closeEvent(QCloseEvent *e)
 void RecordFrm::on_rcdCombo_currentIndexChanged(int index)
 {
     QStringList list;
-    const char cn[][3] = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "冬", "腊"};
+    const char cn[][16] = {"一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "冬", "腊"};
     if (index == 0)
     {
         for (int i = 1; i <= 12; ++i)
@@ -416,22 +420,22 @@ void RecordFrm::on_soundButton_clicked()
 
 void RecordFrm::on_okButton_clicked()
 {
-    if (strlen(ui->textEdit->document()->toPlainText().toAscii().data()) > 255)
+    if (strlen(ui->textEdit->document()->toPlainText().toLocal8Bit().data()) > 255)
     {
         QMessageBox::critical(this, "Sorry", "窗口提示文字太长！请确保长度不超过255个字节");
         return;
     }
-    if (strlen(ui->soundEdit->text().toAscii().data()) > 260)
+    if (strlen(ui->soundEdit->text().toLocal8Bit().data()) > 260)
     {
         QMessageBox::critical(this, "Are you kidding me?", "声音文件有这么长的路径吗？");
         return;
     }
-    if (strlen(ui->cmdEdit->text().toAscii().data()) > 127)
+    if (strlen(ui->cmdEdit->text().toLocal8Bit().data()) > 127)
     {
         QMessageBox::critical(this, "Sorry", "Cmd过长，请确保不要超过127个字节");
         return;
     }
-    if (strlen(ui->nameEdit->text().toAscii().data()) > 63)
+    if (strlen(ui->nameEdit->text().toLocal8Bit().data()) > 63)
     {
         QMessageBox::critical(this, "Sorry", "备注名太长！请确保不要超过63个字节");
         return;
@@ -577,7 +581,7 @@ void RecordFrm::on_okButton_clicked()
     {
         rec->popupWindow = 1;
         strcpy(rec->text, ui->textEdit->document()->
-               toPlainText().toAscii().data());
+               toPlainText().toLocal8Bit().data());
     }
     else
     {
@@ -593,7 +597,7 @@ void RecordFrm::on_okButton_clicked()
         }
         else
         {
-            strcpy(rec->soundfile, ui->soundEdit->text().toAscii().data());
+            strcpy(rec->soundfile, ui->soundEdit->text().toLocal8Bit().data());
         }
     }
     else
@@ -606,7 +610,7 @@ void RecordFrm::on_okButton_clicked()
     if (ui->runcmdCheck->isChecked())
     {
         rec->runCmd = 1;
-        strcpy(rec->cmd, ui->cmdEdit->text().toAscii().data());
+        strcpy(rec->cmd, ui->cmdEdit->text().toLocal8Bit().data());
     }
     else
     {
@@ -614,7 +618,7 @@ void RecordFrm::on_okButton_clicked()
     }
 
 
-    strcpy(rec->name, ui->nameEdit->text().toAscii().data());
+    strcpy(rec->name, ui->nameEdit->text().toLocal8Bit().data());
 
     if (!m_pRecord)
         m_pMain->AddRecord(record);
