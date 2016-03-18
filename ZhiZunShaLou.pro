@@ -13,7 +13,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     Tray.cpp \
-    norwegianwoodstyle.cpp \
     MissingsFrm.cpp \
     CheckFrm.cpp \
     SettingsFrm.cpp \
@@ -23,7 +22,6 @@ SOURCES += main.cpp\
 
 HEADERS  += \
     Tray.h \
-    norwegianwoodstyle.h \
     defines.h \
     MissingsFrm.h \
     CheckFrm.h \
