@@ -539,7 +539,7 @@ void cTray::config()
         m_pSettingsFrm->Setup();
     }
     else
-        m_pRecordFrm->activateWindow();
+        m_pSettingsFrm->activateWindow();
 }
 
 
