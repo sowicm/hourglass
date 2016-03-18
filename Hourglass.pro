@@ -9,7 +9,7 @@ QT       += multimedia
 
 TARGET = Hourglass
 TEMPLATE = app
-
+ICON = icon.icns
 
 SOURCES += main.cpp\
     Tray.cpp \

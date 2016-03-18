@@ -40,7 +40,7 @@ cTray::cTray()
     , m_pCfg(NULL)
     , m_AudioOutput()
 {
-    setWindowIcon(QIcon(":/res/BIGICON.ico"));
+    setWindowIcon(QIcon(":/res/icon.ico"));
     setWindowTitle("至尊沙漏");
 
     m_pSettingsFrm = NULL;

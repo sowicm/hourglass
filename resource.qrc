@@ -33,5 +33,6 @@
         <file>res/woodbutton.png</file>
         <file>res/BIGICON.ico</file>
         <file>res/Zi-Jin-Up.png</file>
+        <file>res/icon.ico</file>
     </qresource>
 </RCC>
