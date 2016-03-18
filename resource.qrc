@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/pagefold/checkbox_checked.png</file>
+        <file>res/pagefold/checkbox_checked_hover.png</file>
+        <file>res/pagefold/checkbox_checked_pressed.png</file>
+        <file>res/pagefold/checkbox_unchecked.png</file>
+        <file>res/pagefold/checkbox_unchecked_hover.png</file>
+        <file>res/pagefold/checkbox_unchecked_pressed.png</file>
+        <file>res/pagefold/down_arrow.png</file>
+        <file>res/pagefold/down_arrow_disabled.png</file>
+        <file>res/pagefold/frame.png</file>
+        <file>res/pagefold/pagefold.png</file>
+        <file>res/pagefold/pagefold.qss</file>
+        <file>res/pagefold/pushbutton.png</file>
+        <file>res/pagefold/pushbutton_hover.png</file>
+        <file>res/pagefold/pushbutton_pressed.png</file>
+        <file>res/pagefold/radiobutton_checked.png</file>
+        <file>res/pagefold/radiobutton_checked_hover.png</file>
+        <file>res/pagefold/radiobutton_checked_pressed.png</file>
+        <file>res/pagefold/radiobutton_unchecked.png</file>
+        <file>res/pagefold/radiobutton_unchecked_hover.png</file>
+        <file>res/pagefold/radiobutton_unchecked_pressed.png</file>
+        <file>res/pagefold/sizegrip.png</file>
+        <file>res/pagefold/spindown.png</file>
+        <file>res/pagefold/spindown_hover.png</file>
+        <file>res/pagefold/spindown_pressed.png</file>
+        <file>res/pagefold/spinup.png</file>
+        <file>res/pagefold/spinup_hover.png</file>
+        <file>res/pagefold/spinup_pressed.png</file>
+        <file>res/pagefold/up_arrow.png</file>
+        <file>res/pagefold/up_arrow_disabled.png</file>
+        <file>res/woodbackground.png</file>
+        <file>res/woodbutton.png</file>
+        <file>res/BIGICON.ico</file>
+        <file>res/Zi-Jin-Up.png</file>
+    </qresource>
+</RCC>
