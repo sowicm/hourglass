@@ -1,4 +1,4 @@
-#include "MissingsFrm.h"
+ï»¿#include "MissingsFrm.h"
 #include "ui_missingsfrm.h"
 
 #include "Tray.h"
@@ -49,10 +49,10 @@ void MissingsFrm::Setup()
     if (!m_pModel)
     {
         m_pModel = new QStandardItemModel(0, 4, this);
-        m_pModel->setHeaderData(0, Qt::Horizontal, "±¸×¢");
-        m_pModel->setHeaderData(1, Qt::Horizontal, "ÀàÐÍ");
-        m_pModel->setHeaderData(2, Qt::Horizontal, "ÌáÐÑÊ±¼ä");
-        m_pModel->setHeaderData(3, Qt::Horizontal, "´´½¨Ê±¼ä");
+        m_pModel->setHeaderData(0, Qt::Horizontal, "å¤‡æ³¨");
+        m_pModel->setHeaderData(1, Qt::Horizontal, "ç±»åž‹");
+        m_pModel->setHeaderData(2, Qt::Horizontal, "æé†’æ—¶é—´");
+        m_pModel->setHeaderData(3, Qt::Horizontal, "åˆ›å»ºæ—¶é—´");
     }
 
     stRecord *rec;
@@ -100,7 +100,7 @@ void MissingsFrm::addRecord(const QString &name, bool once, const QVariant& time
 {
     m_pModel->insertRow(0);
     m_pModel->setData(m_pModel->index(0, 0), name);
-    m_pModel->setData(m_pModel->index(0, 1), once ? "µ±´ÎÌáÐÑ" : "¹æÂÉÌáÐÑ");
+    m_pModel->setData(m_pModel->index(0, 1), once ? "å½“æ¬¡æé†’" : "è§„å¾‹æé†’");
     m_pModel->setData(m_pModel->index(0, 2), time);
     m_pModel->setData(m_pModel->index(0, 3), createTime);
     m_pModel->setData(m_pModel->index(0, 4), cmdLine);

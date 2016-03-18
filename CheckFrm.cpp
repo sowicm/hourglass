@@ -1,4 +1,4 @@
-#include "CheckFrm.h"
+ï»¿#include "CheckFrm.h"
 #include "ui_checkfrm.h"
 
 #include "Tray.h"
@@ -53,11 +53,11 @@ void CheckFrm::Setup()
     if (!m_pModel)
     {
         m_pModel = new QStandardItemModel(0, 5, this);
-        m_pModel->setHeaderData(0, Qt::Horizontal, "±¸×¢");
-        m_pModel->setHeaderData(1, Qt::Horizontal, "ÀàÐÍ");
-        m_pModel->setHeaderData(2, Qt::Horizontal, "ÌáÐÑÊ±¼ä");
-        m_pModel->setHeaderData(3, Qt::Horizontal, "´´½¨Ê±¼ä");
-        m_pModel->setHeaderData(4, Qt::Horizontal, "ÔËÐÐÃüÁî");
+        m_pModel->setHeaderData(0, Qt::Horizontal, "å¤‡æ³¨");
+        m_pModel->setHeaderData(1, Qt::Horizontal, "ç±»åž‹");
+        m_pModel->setHeaderData(2, Qt::Horizontal, "æé†’æ—¶é—´");
+        m_pModel->setHeaderData(3, Qt::Horizontal, "åˆ›å»ºæ—¶é—´");
+        m_pModel->setHeaderData(4, Qt::Horizontal, "è¿è¡Œå‘½ä»¤");
     }
 
     stRecord *rec;
@@ -72,15 +72,15 @@ void CheckFrm::Setup()
             switch (rec->onceType)
             {
             case nextRun:
-                remindtime = "ÏÂ´ÎÆô¶¯Ê±";
+                remindtime = "ä¸‹æ¬¡å¯åŠ¨æ—¶";
                 break;
 
             case nextOnline:
-                remindtime = "ÏÂ´ÎÁ¬ÈëInternetÊ±";
+                remindtime = "ä¸‹æ¬¡è¿žå…¥Internetæ—¶";
                 break;
 
             case nextOffline:
-                remindtime = "ÏÂ´Î´ÓInternet¶Ï¿ªÊ±";
+                remindtime = "ä¸‹æ¬¡ä»ŽInternetæ–­å¼€æ—¶";
                 break;
 
             default:
@@ -94,15 +94,15 @@ void CheckFrm::Setup()
             switch (rec->ruleType)
             {
             case perRun:
-                remindtime = "Ã¿´ÎÆô¶¯Ê±";
+                remindtime = "æ¯æ¬¡å¯åŠ¨æ—¶";
                 break;
 
             case perOnline:
-                remindtime = "Ã¿´ÎÁ¬ÈëInternetÊ±";
+                remindtime = "æ¯æ¬¡è¿žå…¥Internetæ—¶";
                 break;
 
             case perOffline:
-                remindtime = "Ã¿´Î´ÓInternet¶Ï¿ªÊ±";
+                remindtime = "æ¯æ¬¡ä»ŽInternetæ–­å¼€æ—¶";
                 break;
 
             default:
@@ -128,7 +128,7 @@ void CheckFrm::Setup()
     ui->treeView->setColumnWidth(2, 125);
     ui->treeView->setColumnWidth(3, 125);
 
-    ui->label->setText("¹²ÓÐ" + QString::number(m_pMain->m_Records.size()) + "Ìõ¼ÇÂ¼");
+    ui->label->setText("å…±æœ‰" + QString::number(m_pMain->m_Records.size()) + "æ¡è®°å½•");
 
 
     show();
@@ -151,7 +151,7 @@ void CheckFrm::addRecord(const QString &name, bool once, const QVariant &time, c
 {
     m_pModel->insertRow(0);
     m_pModel->setData(m_pModel->index(0, 0), name);
-    m_pModel->setData(m_pModel->index(0, 1), once ? "µ±´ÎÌáÐÑ" : "¹æÂÉÌáÐÑ");
+    m_pModel->setData(m_pModel->index(0, 1), once ? "å½“æ¬¡æé†’" : "è§„å¾‹æé†’");
     m_pModel->setData(m_pModel->index(0, 2), time);
     m_pModel->setData(m_pModel->index(0, 3), createTime);
     m_pModel->setData(m_pModel->index(0, 4), cmdLine);
@@ -186,8 +186,8 @@ void CheckFrm::on_deleteButton_clicked()
 {
     if (QMessageBox::warning(
             this,
-            "ÄãÈ·¶¨£¿",
-            "È·¶¨ÒªÉ¾³ýÕâ¸öÌáÐÑÂð£¿²Ù×÷²»¿É»Ö¸´¡£",
+            "ä½ ç¡®å®šï¼Ÿ",
+            "ç¡®å®šè¦åˆ é™¤è¿™ä¸ªæé†’å—ï¼Ÿæ“ä½œä¸å¯æ¢å¤ã€‚",
             QMessageBox::Yes | QMessageBox::No
             ) == QMessageBox::Yes)
     {
@@ -199,7 +199,7 @@ void CheckFrm::on_deleteButton_clicked()
             {
                 m_pMain->RemoveRecord(i);
                 m_pProxyModel->removeRow(_index.row());
-                ui->label->setText("¹²ÓÐ" + QString::number(m_pMain->m_Records.size()) + "Ìõ¼ÇÂ¼");
+                ui->label->setText("å…±æœ‰" + QString::number(m_pMain->m_Records.size()) + "æ¡è®°å½•");
                 break;
             }
         }
@@ -214,13 +214,13 @@ void CheckFrm::on_lineEdit_textChanged(QString filterPattern)
 
 void CheckFrm::on_pushButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, QString(), qApp->applicationDirPath(), "Êý¾ÝÎÄ¼þ(*.dat)");
+    QString fileName = QFileDialog::getOpenFileName(this, QString(), qApp->applicationDirPath(), "æ•°æ®æ–‡ä»¶(*.dat)");
     if (!fileName.isEmpty())
     {
         int n = m_pMain->LoadDB(fileName);
         if (n < 0)
-            QMessageBox::critical(this, "Oh~Oh£¡", "´ËÎÄ¼þ²»ÊÇ¡¶ÖÁ×ðÉ³Â©¡·Êý¾ÝÎÄ¼þ»òÎÄ¼þÒÑËð»µ£¡");
+            QMessageBox::critical(this, "Oh~Ohï¼", "æ­¤æ–‡ä»¶ä¸æ˜¯ã€Šè‡³å°Šæ²™æ¼ã€‹æ•°æ®æ–‡ä»¶æˆ–æ–‡ä»¶å·²æŸåï¼");
         else
-            QMessageBox::information(this, "µ¼Èë³É¹¦", "ÒÑ³É¹¦µ¼Èë" + QString::number(n) + "Ïî¼ÍÂ¼");
+            QMessageBox::information(this, "å¯¼å…¥æˆåŠŸ", "å·²æˆåŠŸå¯¼å…¥" + QString::number(n) + "é¡¹çºªå½•");
     }
 }

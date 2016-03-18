@@ -1,4 +1,4 @@
-#include "Tray.h"
+ï»¿#include "Tray.h"
 
 #include "norwegianwoodstyle.h"
 #include "settingsfrm.h"
@@ -43,7 +43,7 @@ cTray::cTray()
     , m_AudioOutput(Phonon::VideoCategory)
 {
     setWindowIcon(QIcon(":/res/BIGICON.ico"));
-    setWindowTitle("ÖÁ×ğÉ³Â©");
+    setWindowTitle("è‡³å°Šæ²™æ¼");
 
     m_pSettingsFrm = NULL;
     m_pMissingsFrm = NULL;
@@ -106,24 +106,24 @@ int cTray::Setup()
 
     changeStyle(m_pCfg->value("/config/style", "Pagefold").toString());
 
-    m_pacVisit = new QAction("·ÃÎÊÖ÷Ò³", this);
+    m_pacVisit = new QAction("è®¿é—®ä¸»é¡µ", this);
     connect(m_pacVisit, SIGNAL(triggered()), this, SLOT(visit()));
     //---
-    m_pacAdd = new QAction("Ìí¼ÓÌáĞÑ", this);
+    m_pacAdd = new QAction("æ·»åŠ æé†’", this);
     connect(m_pacAdd, SIGNAL(triggered()), this, SLOT(add()));
-    m_pacCheck = new QAction("²é¿´ÌáĞÑ", this);
+    m_pacCheck = new QAction("æŸ¥çœ‹æé†’", this);
     connect(m_pacCheck, SIGNAL(triggered()), this, SLOT(check()));
-    m_pacConfig = new QAction("ÉèÖÃ", this);
+    m_pacConfig = new QAction("è®¾ç½®", this);
     connect(m_pacConfig, SIGNAL(triggered()), this, SLOT(config()));
     //---
-    m_pacPause = new QAction("ÔİÍ£ÔËĞĞ", this);
+    m_pacPause = new QAction("æš‚åœè¿è¡Œ", this);
     connect(m_pacPause, SIGNAL(triggered()), this, SLOT(pause()));
-    m_pacAllSound = new QAction("¹Ø±ÕËùÓĞÉùÒô", this);
+    m_pacAllSound = new QAction("å…³é—­æ‰€æœ‰å£°éŸ³", this);
     connect(m_pacAllSound, SIGNAL(triggered()), this, SLOT(switchSound()));
-    m_pacAllTurn = new QAction("¹Ø±ÕËùÓĞ×Ô¶¯ÇĞ»»", this);
+    m_pacAllTurn = new QAction("å…³é—­æ‰€æœ‰è‡ªåŠ¨åˆ‡æ¢", this);
     connect(m_pacAllTurn, SIGNAL(triggered()), this, SLOT(switchTurn()));
     //---
-    m_pacQuit = new QAction("ÍË³ö", this);
+    m_pacQuit = new QAction("é€€å‡º", this);
     connect(m_pacQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
     m_pMenu = new QMenu(this);
@@ -148,7 +148,7 @@ int cTray::Setup()
             this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason)));
 
     m_pIcon->show();
-    ShowMessage(NULL, "ÖÁ×ğÉ³Â©¿ªÊ¼ÔËĞĞ...", NoIcon);//QSystemTrayIcon::MessageIcon(0)
+    ShowMessage(NULL, "è‡³å°Šæ²™æ¼å¼€å§‹è¿è¡Œ...", NoIcon);//QSystemTrayIcon::MessageIcon(0)
 
 
     LoadDB(qApp->applicationDirPath() + "/db.dat");
@@ -190,7 +190,7 @@ int cTray::Setup()
 
     CheckOverdueRecords();
 
-    //SetMessage(NULL, "¾àÀëÏÂÒ»´ÎÌáĞÑ»¹ÓĞ", NoIcon);
+    //SetMessage(NULL, "è·ç¦»ä¸‹ä¸€æ¬¡æé†’è¿˜æœ‰", NoIcon);
 
     m_pTimer = new QTimer(this);
     connect(m_pTimer, SIGNAL(timeout()), this, SLOT(mainloop()));
@@ -246,21 +246,21 @@ void cTray::AddRecord(stRecord &rec, bool modify)
     char str[128];
     if (rec.time == 0x7777777777777777LL)
     {
-        strcpy(str, "½«ÔÚÏÂ´ÎÆô¶¯±¾³ÌĞòÊ±ÌáĞÑ");
+        strcpy(str, "å°†åœ¨ä¸‹æ¬¡å¯åŠ¨æœ¬ç¨‹åºæ—¶æé†’");
     }
     else if (rec.time == 0x7777777777777776LL)
     {
-        strcpy(str, "½«ÔÚÏÂ´ÎÁ¬Èë»¥ÁªÍøÄÇÒ»¿ÌÌáĞÑ");
+        strcpy(str, "å°†åœ¨ä¸‹æ¬¡è¿å…¥äº’è”ç½‘é‚£ä¸€åˆ»æé†’");
     }
     else if (rec.time == 0x7777777777777775LL)
     {
-        strcpy(str, "½«ÔÚÏÂ´Î¶Ï¿ª»¥ÁªÍøÄÇÒ»¿ÌÌáĞÑ");
+        strcpy(str, "å°†åœ¨ä¸‹æ¬¡æ–­å¼€äº’è”ç½‘é‚£ä¸€åˆ»æé†’");
     }
     else
     {
         QDateTime dt;
         dt.setMSecsSinceEpoch(rec.time);
-        sprintf(str, "½«ÔÚ %04dÄê%02dÔÂ%02dÈÕ %02d:%02d:%02d Ê±ÌáĞÑ",
+        sprintf(str, "å°†åœ¨ %04då¹´%02dæœˆ%02dæ—¥ %02d:%02d:%02d æ—¶æé†’",
                 dt.date().year(),
                 dt.date().month(),
                 dt.date().day(),
@@ -268,7 +268,7 @@ void cTray::AddRecord(stRecord &rec, bool modify)
                 dt.time().minute(),
                 dt.time().second());
     }
-    ShowMessage(modify ? "ÌáĞÑ±»ĞŞ¸Ä" : "ĞÂÌáĞÑ", str);
+    ShowMessage(modify ? "æé†’è¢«ä¿®æ”¹" : "æ–°æé†’", str);
     m_Message = msg;
 
     UpdateTrayMessage();
@@ -329,7 +329,7 @@ void cTray::UpdateTrayMessage()
 {
     if (m_Records.size() < 1)
     {
-        SetMessage(NULL, "Î´ÉèÖÃÈÎºÎÌáĞÑ", NoIcon);
+        SetMessage(NULL, "æœªè®¾ç½®ä»»ä½•æé†’", NoIcon);
         return;
     }
 
@@ -337,21 +337,21 @@ void cTray::UpdateTrayMessage()
 
     if (m_Records[0].time == 0x7777777777777777LL)
     {
-        strcpy(str, "ÏÂÒ»´ÎÌáĞÑÔÚÏÂ´ÎÆô¶¯±¾³ÌĞòÊ±");
+        strcpy(str, "ä¸‹ä¸€æ¬¡æé†’åœ¨ä¸‹æ¬¡å¯åŠ¨æœ¬ç¨‹åºæ—¶");
     }
     else if (m_Records[0].time == 0x7777777777777776LL)
     {
-        strcpy(str, "ÏÂÒ»´ÎÌáĞÑÔÚÏÂ´ÎÁ¬Èë»¥ÁªÍøÄÇÒ»¿Ì");
+        strcpy(str, "ä¸‹ä¸€æ¬¡æé†’åœ¨ä¸‹æ¬¡è¿å…¥äº’è”ç½‘é‚£ä¸€åˆ»");
     }
     else if (m_Records[0].time == 0x7777777777777775LL)
     {
-        strcpy(str, "ÏÂÒ»´ÎÌáĞÑÔÚÏÂ´Î¶Ï¿ª»¥ÁªÍøÄÇÒ»¿Ì");
+        strcpy(str, "ä¸‹ä¸€æ¬¡æé†’åœ¨ä¸‹æ¬¡æ–­å¼€äº’è”ç½‘é‚£ä¸€åˆ»");
     }
     else
     {
         QDateTime dt;
         dt.setMSecsSinceEpoch(m_Records[0].time);
-        sprintf(str, "ÏÂÒ»´ÎÌáĞÑÔÚ %04dÄê%02dÔÂ%02dÈÕ %02d:%02d:%02d",
+        sprintf(str, "ä¸‹ä¸€æ¬¡æé†’åœ¨ %04då¹´%02dæœˆ%02dæ—¥ %02d:%02d:%02d",
                 dt.date().year(),
                 dt.date().month(),
                 dt.date().day(),
@@ -484,7 +484,7 @@ int cTray::LoadDB(const QString &DBFilePath)
 void cTray::CheckOverdueRecords()
 {
     m_bRun = false;
-    SetMessage(NULL, "Çë´¦Àíµô´í¹ıµÄÌáĞÑ", NoIcon);
+    SetMessage(NULL, "è¯·å¤„ç†æ‰é”™è¿‡çš„æé†’", NoIcon);
     if (m_Records.size() < 1 || m_Records[0].time >= QDateTime::currentMSecsSinceEpoch())
     {
         AfterProcMissing();
@@ -545,15 +545,15 @@ void cTray::pause()
     {
         CheckOverdueRecords();
         m_bPause = false;
-        m_pacPause->setText("ÔİÍ£ÔËĞĞ");
+        m_pacPause->setText("æš‚åœè¿è¡Œ");
         stMsg msg = m_Message;
         if (m_bRun)
         {
-            ShowMessage("»Ö¸´", "ÖÁ×ğÉ³Â©ÒÑ»Ö¸´ÔËĞĞ...");
+            ShowMessage("æ¢å¤", "è‡³å°Šæ²™æ¼å·²æ¢å¤è¿è¡Œ...");
         }
         else
         {
-            ShowMessage("»Ö¸´-×¢Òâ", "ÒÑÈ¡ÏûÔİÍ££¬µ«ÔÚ´¦ÀíÍê´í¹ıµÄÌáĞÑÇ°£¬ÌáĞÑ¹¦ÄÜÈÔ²»»á¿ªÆô£¡", Warning);
+            ShowMessage("æ¢å¤-æ³¨æ„", "å·²å–æ¶ˆæš‚åœï¼Œä½†åœ¨å¤„ç†å®Œé”™è¿‡çš„æé†’å‰ï¼Œæé†’åŠŸèƒ½ä»ä¸ä¼šå¼€å¯ï¼", Warning);
         }
 
         m_Message = msg;
@@ -561,8 +561,8 @@ void cTray::pause()
     else
     {
         m_bPause = true;
-        m_pacPause->setText("»Ö¸´ÔËĞĞ");
-        ShowMessage("ÔİÍ£", "ÖÁ×ğÉ³Â©ÒÑÔİÍ£ÔËĞĞ...");
+        m_pacPause->setText("æ¢å¤è¿è¡Œ");
+        ShowMessage("æš‚åœ", "è‡³å°Šæ²™æ¼å·²æš‚åœè¿è¡Œ...");
     }
 }
 
@@ -573,13 +573,13 @@ void cTray::switchSound()
     {
         m_pCfg->setValue("/switch/sound", 0);
         m_switchSound = false;
-        m_pacAllSound->setText("¿ªÆôÉùÒô¹¦ÄÜ");
+        m_pacAllSound->setText("å¼€å¯å£°éŸ³åŠŸèƒ½");
     }
     else
     {
         m_pCfg->setValue("/switch/sound", 1);
         m_switchSound = true;
-        m_pacAllSound->setText("¹Ø±ÕËùÓĞÉùÒô");
+        m_pacAllSound->setText("å…³é—­æ‰€æœ‰å£°éŸ³");
     }
     m_pIcon->setToolTip(getToolTip());
 }
@@ -591,13 +591,13 @@ void cTray::switchTurn()
     {
         m_pCfg->setValue("/switch/turn", 0);
         m_switchTurn = false;
-        m_pacAllTurn->setText("¿ªÆô×Ô¶¯ÇĞ»»¹¦ÄÜ");
+        m_pacAllTurn->setText("å¼€å¯è‡ªåŠ¨åˆ‡æ¢åŠŸèƒ½");
     }
     else
     {
         m_pCfg->setValue("/switch/turn", 1);
         m_switchTurn = true;
-        m_pacAllTurn->setText("¹Ø±ÕËùÓĞ×Ô¶¯ÇĞ»»");
+        m_pacAllTurn->setText("å…³é—­æ‰€æœ‰è‡ªåŠ¨åˆ‡æ¢");
     }
     m_pIcon->setToolTip(getToolTip());
 }
@@ -635,11 +635,11 @@ void cTray::showMessage()
 
 QString cTray::getToolTip()
 {
-    QString s = "ÖÁ×ğÉ³Â©";
-    s.append("\r\nÉùÒô£º");
-    s.append(m_pCfg->value("/switch/sound", 1) == 1 ? "¿ªÆô" : "¹Ø±Õ");
-    s.append("\r\n×Ô¶¯ÇĞ»»£º");
-    s.append(m_pCfg->value("/switch/turn", 1) == 1 ? "¿ªÆô" : "¹Ø±Õ");
+    QString s = "è‡³å°Šæ²™æ¼";
+    s.append("\r\nå£°éŸ³ï¼š");
+    s.append(m_pCfg->value("/switch/sound", 1) == 1 ? "å¼€å¯" : "å…³é—­");
+    s.append("\r\nè‡ªåŠ¨åˆ‡æ¢ï¼š");
+    s.append(m_pCfg->value("/switch/turn", 1) == 1 ? "å¼€å¯" : "å…³é—­");
     return s;
 }
 
@@ -864,11 +864,11 @@ void cTray::doRemind(int i)
 {
     stRecord& rec = m_Records[i];
     stMsg msg = m_Message;
-    ShowMessage("ÌáĞÑ", QString("[") + rec.name + "]Ê±¼äÒÑµ½£¡");
+    ShowMessage("æé†’", QString("[") + rec.name + "]æ—¶é—´å·²åˆ°ï¼");
     m_Message = msg;
     if (rec.popupWindow)
     {
-        QMessageBox *msgBox = new QMessageBox(QMessageBox::Information, "ÌáĞÑ", rec.text, QMessageBox::Ok, this);
+        QMessageBox *msgBox = new QMessageBox(QMessageBox::Information, "æé†’", rec.text, QMessageBox::Ok, this);
         m_MsgBoxes.append(msgBox);
         msgBox->show();
     }

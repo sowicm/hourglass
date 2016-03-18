@@ -1,4 +1,4 @@
-#include "RecordFrm.h"
+ï»¿#include "RecordFrm.h"
 #include "ui_RecordFrm.h"
 
 #include "Tray.h"
@@ -270,26 +270,26 @@ void RecordFrm::closeEvent(QCloseEvent *e)
 void RecordFrm::on_rcdCombo_currentIndexChanged(int index)
 {
     QStringList list;
-    const char cn[][3] = {"Ò»", "¶ş", "Èı", "ËÄ", "Îå", "Áù", "Æß", "°Ë", "¾Å", "Ê®", "¶¬", "À°"};
+    const char cn[][3] = {"ä¸€", "äºŒ", "ä¸‰", "å››", "äº”", "å…­", "ä¸ƒ", "å…«", "ä¹", "å", "å†¬", "è…Š"};
     if (index == 0)
     {
         for (int i = 1; i <= 12; ++i)
         {
-            list << QString::number(i) + "ÔÂ";
+            list << QString::number(i) + "æœˆ";
         }
     }
     else if (index == 1)
     {
         for (int i = 0; i < 12; ++i)
         {
-            list << QString(cn[i]) + "ÔÂ";
+            list << QString(cn[i]) + "æœˆ";
         }
     }
 
     ui->rmCombo->clear();
     ui->rmCombo->addItems(list);
 
-    // TODO£º ×Ô¶¯×ª»»Å©Àú¹«ÀúÈÕÆÚ
+    // TODOï¼š è‡ªåŠ¨è½¬æ¢å†œå†å…¬å†æ—¥æœŸ
 }
 
 void RecordFrm::on_rmCombo_currentIndexChanged(int index)
@@ -300,7 +300,7 @@ void RecordFrm::on_rmCombo_currentIndexChanged(int index)
     if (cd == 0)
     {
         for (int i = 1; i <= days[index]; ++i)
-            list << QString::number(i) + "ÈÕ";
+            list << QString::number(i) + "æ—¥";
     }
     ui->rdCombo->clear();
     ui->rdCombo->addItems(list);
@@ -418,22 +418,22 @@ void RecordFrm::on_okButton_clicked()
 {
     if (strlen(ui->textEdit->document()->toPlainText().toAscii().data()) > 255)
     {
-        QMessageBox::critical(this, "Sorry", "´°¿ÚÌáÊ¾ÎÄ×ÖÌ«³¤£¡ÇëÈ·±£³¤¶È²»³¬¹ı255¸ö×Ö½Ú");
+        QMessageBox::critical(this, "Sorry", "çª—å£æç¤ºæ–‡å­—å¤ªé•¿ï¼è¯·ç¡®ä¿é•¿åº¦ä¸è¶…è¿‡255ä¸ªå­—èŠ‚");
         return;
     }
     if (strlen(ui->soundEdit->text().toAscii().data()) > 260)
     {
-        QMessageBox::critical(this, "Are you kidding me?", "ÉùÒôÎÄ¼şÓĞÕâÃ´³¤µÄÂ·¾¶Âğ£¿");
+        QMessageBox::critical(this, "Are you kidding me?", "å£°éŸ³æ–‡ä»¶æœ‰è¿™ä¹ˆé•¿çš„è·¯å¾„å—ï¼Ÿ");
         return;
     }
     if (strlen(ui->cmdEdit->text().toAscii().data()) > 127)
     {
-        QMessageBox::critical(this, "Sorry", "Cmd¹ı³¤£¬ÇëÈ·±£²»Òª³¬¹ı127¸ö×Ö½Ú");
+        QMessageBox::critical(this, "Sorry", "Cmdè¿‡é•¿ï¼Œè¯·ç¡®ä¿ä¸è¦è¶…è¿‡127ä¸ªå­—èŠ‚");
         return;
     }
     if (strlen(ui->nameEdit->text().toAscii().data()) > 63)
     {
-        QMessageBox::critical(this, "Sorry", "±¸×¢ÃûÌ«³¤£¡ÇëÈ·±£²»Òª³¬¹ı63¸ö×Ö½Ú");
+        QMessageBox::critical(this, "Sorry", "å¤‡æ³¨åå¤ªé•¿ï¼è¯·ç¡®ä¿ä¸è¦è¶…è¿‡63ä¸ªå­—èŠ‚");
         return;
     }
 
@@ -486,7 +486,7 @@ void RecordFrm::on_okButton_clicked()
         }
         else
         {
-            QMessageBox::information(this, "Oh~Oh!", "ÇëÖ¸¶¨[¶¨Ê±ÌáĞÑ]¡¢[ÑÓÊ±ÌáĞÑ]µÈ¾ßÌåÌáĞÑÊ±¼ä", QMessageBox::Ok);
+            QMessageBox::information(this, "Oh~Oh!", "è¯·æŒ‡å®š[å®šæ—¶æé†’]ã€[å»¶æ—¶æé†’]ç­‰å…·ä½“æé†’æ—¶é—´", QMessageBox::Ok);
             return;
         }
     }
@@ -538,7 +538,7 @@ void RecordFrm::on_okButton_clicked()
         }
         else
         {
-            QMessageBox::information(this, "Oh~Oh!", "ÇëÖ¸¶¨ÌáĞÑ¹æÂÉ£¡", QMessageBox::Ok);
+            QMessageBox::information(this, "Oh~Oh!", "è¯·æŒ‡å®šæé†’è§„å¾‹ï¼", QMessageBox::Ok);
             return;
         }
 

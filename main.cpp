@@ -1,4 +1,4 @@
-#include <QtGui/QApplication>
+ï»¿#include <QtGui/QApplication>
 #include <QtCore/QTextCodec>
 #include <QDir>
 
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     if (GetLastError() == ERROR_ALREADY_EXISTS)
     {
         CloseHandle(hMutex);
-        MessageBoxA(NULL, "¸ÉÂïÍ¬Ê±ÔËĞĞ2¸öÄØ£¿", "Oh~Oh!", MB_OK | MB_ICONINFORMATION);
+        MessageBoxA(NULL, "å¹²å˜›åŒæ—¶è¿è¡Œ2ä¸ªå‘¢ï¼Ÿ", "Oh~Oh!", MB_OK | MB_ICONINFORMATION);
         return 0;
     }
 #endif
@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForLocale());
     //QTextCodec::codecForName("UTF-8"));
 
-    a.setApplicationName("ÖÁ×ğÉ³Â©");
-    a.setOrganizationName("ÖÁ×ğÃ÷Ë§");
+    a.setApplicationName("è‡³å°Šæ²™æ¼");
+    a.setOrganizationName("è‡³å°Šæ˜å¸…");
     a.setOrganizationDomain("zi-jin.com");
 
     a.setQuitOnLastWindowClosed(false);

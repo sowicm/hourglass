@@ -1,4 +1,4 @@
-#include "SettingsFrm.h"
+ï»¿#include "SettingsFrm.h"
 #include "ui_settingsfrm.h"
 
 #include "Tray.h"
@@ -83,7 +83,7 @@ void SettingsFrm::on_pushButton_clicked()
 {
     if (strlen(ui->soundEdit->text().toAscii().data()) > 260)
     {
-        QMessageBox::critical(this, "Are you kidding me?", "ÉùÒôÎÄ¼şÓĞÕâÃ´³¤µÄÂ·¾¶Âğ£¿");
+        QMessageBox::critical(this, "Are you kidding me?", "å£°éŸ³æ–‡ä»¶æœ‰è¿™ä¹ˆé•¿çš„è·¯å¾„å—ï¼Ÿ");
         return;
     }
 
